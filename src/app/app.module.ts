@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { CribListingComponent } from './crib-listing/crib-listing.component';
 import { CribCardComponent } from './crib-card/crib-card.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent, // here there are all the components we have
@@ -12,6 +14,7 @@ import { CribCardComponent } from './crib-card/crib-card.component';
   ],
   imports: [
     BrowserModule// our imports
+    , HttpClientModule
   ],
   providers: [], // our injectible services
   bootstrap: [AppComponent] // the main component of the app. the other will be its child components
