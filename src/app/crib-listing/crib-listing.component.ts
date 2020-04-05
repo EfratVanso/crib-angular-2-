@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { cribs } from './data/cribsData';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-// import { from } from 'rxjs';
 import { CribsService } from './../services/cribs.service';
 
 
@@ -35,6 +34,10 @@ export class CribListingComponent implements OnInit {
       error => this.error = error.statusText;
     });
 
+    // when adding new item, this function is being called
+    this.cribsService.newCribSubject.subscribe(
+      // data => console.log(data));
+      data => this.cribs = [data, ...this.cribs ]// push the new data to the start of the array
+    );
   }
-
 }

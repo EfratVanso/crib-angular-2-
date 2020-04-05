@@ -7,15 +7,18 @@ import { CribCardComponent } from './crib-card/crib-card.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CribsService } from './services/cribs.service';
+import { AddListingFormComponent } from './add-listing-form/add-listing-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent, // here there are all the components we have
-    CribListingComponent, CribCardComponent
+    CribListingComponent, CribCardComponent, AddListingFormComponent
   ],
   imports: [
     BrowserModule// our imports
-    , HttpClientModule
+    , HttpClientModule,
+    FormsModule
   ],
   providers: [CribsService], // our injectible services
   bootstrap: [AppComponent] // the main component of the app. the other will be its child components
