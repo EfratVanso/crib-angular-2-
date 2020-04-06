@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { cribs } from './data/cribsData';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CribsService } from './../services/cribs.service';
+import { UtilService } from './../services/util.service';
 
 
 @Component({
@@ -14,9 +15,20 @@ export class CribListingComponent implements OnInit {
 
   cribs: Array<any>;
   error: string;
+  sortDirection = 'asc';
+  sortField = 'price';
+  sortFields: Array<string> = [
+    'address',
+    'price',
+    'area',
+    'bathrooms',
+    'bedrooms',
+    'type'
+  ];
   // cribs: Array<any> = cribs;
   constructor(private http: HttpClient,
-              private cribsService: CribsService) { }
+              private cribsService: CribsService,
+              public utilService: UtilService) { }
 
   ngOnInit(): void {
     // make an http request
@@ -31,6 +43,7 @@ export class CribListingComponent implements OnInit {
     this.cribsService.getAllCribs().subscribe(data => {
       console.log(data);
       this.cribs = JSON.parse(JSON.stringify(data));
+      // tslint:disable-next-line: no-unused-expression
       error => this.error = error.statusText;
     });
 
