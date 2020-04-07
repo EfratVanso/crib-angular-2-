@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CribsService } from './../services/cribs.service';
 import { UtilService } from './../services/util.service';
+import { Crib } from '../crib';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { UtilService } from './../services/util.service';
 export class CribListingComponent implements OnInit {
 
 
-  cribs: Array<any>;
+  cribs: Array<Crib>;
   error: string;
   sortDirection = 'asc';
   sortField = 'price';
@@ -31,20 +32,17 @@ export class CribListingComponent implements OnInit {
               public utilService: UtilService) { }
 
   ngOnInit(): void {
-    // make an http request
-  //   this.http.get('assets/cribsData.json').subscribe(data => {
-  //     console.log(data);
-  //     this.cribs = JSON.parse(JSON.stringify(data));
-  //     error => this.error = error.statusText;
-  //    // console.log('this:/n' + this.cribs);
-  // });
-
    // make an http request from the service
-    this.cribsService.getAllCribs().subscribe(data => {
-      console.log(data);
-      this.cribs = JSON.parse(JSON.stringify(data));
-      // tslint:disable-next-line: no-unused-expression
-      error => this.error = error.statusText;
+    this.cribsService.getAllCribs().subscribe({
+      //data => {
+
+      // console.log(data);
+      // this.cribs = data;
+      // error => this.error = error.statusText;
+      next: data => {this.cribs = data;
+                     console.log('Http req for all cribs:\n' + JSON.stringify(data));
+      },
+      error: err => this.error = err
     });
 
     // when adding new item, this function is being called
